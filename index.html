@@ -12,7 +12,7 @@
 <meta property="og:image" content="https://syuii.github.io/ascent/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Ascent: Measure your jump. Track your ascent. A highlight of a dunk at 82.0 cm and the app's Home screen.">
+<meta property="og:image:alt" content="Ascent. Measure your jump. Track your ascent. A highlight of a dunk at 82.0 cm and the app's Home screen.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://syuii.github.io/ascent/og.jpg">
 <script>
@@ -186,10 +186,10 @@
       </div>
       <div class="phones">
         <div class="phone back">
-          <img class="when-light" src="home.jpg" alt="Ascent's Home screen: Pocket, Vision and Upload, a goal of 100.3 cm and a personal record of 92.2 cm">
-          <img class="when-dark" src="home-dark.jpg" alt="Ascent's Home screen in dark mode: Pocket, Vision and Upload, a goal of 100.3 cm and a personal record of 92.2 cm">
+          <img class="when-light" src="home.jpg" alt="Ascent's Home screen with Pocket, Vision and Upload, a goal of 100.3 cm and a personal record of 92.2 cm">
+          <img class="when-dark" src="home-dark.jpg" alt="Ascent's Home screen in dark mode with Pocket, Vision and Upload, a goal of 100.3 cm and a personal record of 92.2 cm">
         </div>
-        <div class="phone front"><img class="keep-left" src="highlight.jpg" alt="An Ascent highlight at the top of a dunk: 82.0 cm, 4.01 m/s takeoff, 0.82 s hang time, with the path of the jump drawn in"></div>
+        <div class="phone front"><img class="keep-left" src="highlight.jpg" alt="An Ascent highlight at the top of a dunk, 82.0 cm, 4.01 m/s takeoff, 0.82 s hang time, with the path of the jump drawn in"></div>
       </div>
     </div>
   </div>
@@ -207,7 +207,7 @@
         <p class="mode-line" id="mode-line">Put it in your pocket and jump. Hear every height.</p>
       </div>
       <div class="phone">
-        <video id="mode-video" src="pocket-set.mp4" poster="pocket-set.jpg" autoplay muted loop playsinline aria-label="Pocket during a set: five jumps land one by one, 53 to 61 cm, the best marked"></video>
+        <video id="mode-video" src="pocket-set.mp4" poster="pocket-set.jpg" autoplay muted loop playsinline aria-label="Pocket during a set, five jumps landing one by one from 53 to 61 cm, the best marked"></video>
         <img id="mode-screen" src="pocket-set.jpg" alt="" hidden>
       </div>
     </div>
@@ -217,7 +217,7 @@
         <h2>Precision.</h2>
         <p>Ascent finds takeoff and landing for you. Adjust manually afterwards to find the exact jump height.</p>
       </div>
-      <div class="phone"><img src="exact.jpg" alt="Adjust frames: takeoff at frame 21 and landing at frame 70, stepping one frame at a time" loading="lazy"></div>
+      <div class="phone"><img src="exact.jpg" alt="Adjusting frames, with takeoff at frame 21 and landing at frame 70, one frame at a time" loading="lazy"></div>
     </div>
 
     <div class="row">
@@ -225,7 +225,7 @@
         <h2>Share it.</h2>
         <p>Share or save your best jump as a highlight.</p>
       </div>
-      <div class="phone"><img src="share-92.jpg" alt="The highlight maker: a jump to the top of the wall, 92.2 cm, 4.25 m/s takeoff, 0.87 s hang time, with the path of the jump drawn in" loading="lazy"></div>
+      <div class="phone"><img src="share-92.jpg" alt="The highlight maker with a jump to the top of the wall, 92.2 cm, 4.25 m/s takeoff, 0.87 s hang time, with the path of the jump drawn in" loading="lazy"></div>
     </div>
   </section>
 
@@ -237,7 +237,7 @@
       <div class="faq">
         <details>
           <summary>How does Ascent measure my jump?</summary>
-          <p>It times how long you're in the air, the same way jump mats do, and works out the height from that. Pocket uses your phone's motion sensors; Vision and Upload find your takeoff and landing in the video.</p>
+          <p>It times how long you're in the air, the same way jump mats do, and works out the height from that. Pocket uses your phone's motion sensors. Vision and Upload find your takeoff and landing in the video.</p>
         </details>
         <details>
           <summary>Do I need any equipment?</summary>
@@ -293,9 +293,9 @@
 
   // Measure it: each way to measure swaps the phone's screen and the line above.
   const ways = [
-    ['pocket-set.mp4', 'Put it in your pocket and jump. Hear every height.', 'Pocket during a set: five jumps land one by one, 53 to 61 cm, the best marked'],
-    ['vision.jpg', 'Prop it up and jump. It calls out every jump.', 'Vision tracking a jump at its peak: jump 3, 79 cm'],
-    ['upload-screen.jpg', 'Pick a video. Every jump, found.', "Upload's first screen: choose a video, or hold to film one"],
+    ['pocket-set.mp4', 'Put it in your pocket and jump. Hear every height.', 'Pocket during a set, five jumps landing one by one from 53 to 61 cm, the best marked'],
+    ['vision.jpg', 'Prop it up and jump. It calls out every jump.', 'Vision tracking a jump at its peak, jump 3 at 79 cm'],
+    ['upload-screen.jpg', 'Pick a video. Every jump, found.', "Upload's first screen, to choose a video or hold to film one"],
   ];
   // A way with a video plays it; the others show their screen.
   const screen = document.getElementById('mode-screen');
