@@ -116,8 +116,10 @@
   .head.center { margin-left: auto; margin-right: auto; text-align: center; }
 
   /* Measure it, make it exact, share it: one phone and a few lines each. */
-  .row { max-width: 1000px; margin: 0 auto; padding: 72px 16px; display: flex; flex-wrap: wrap; align-items: center;
-         justify-content: space-between; gap: 48px; border-top: 1px solid var(--line); }
+  /* The phones alternate sides, so the rows need no rule between them: air instead. */
+  .row { max-width: 1000px; margin: 0 auto; padding: 96px 16px; display: flex; flex-wrap: wrap; align-items: center;
+         justify-content: space-between; gap: 48px; }
+  @media (max-width: 900px) { .row { padding: 72px 16px 84px; } }
   .row.flip { flex-direction: row-reverse; }
   .row .text { flex: 1 1 380px; max-width: 460px; display: flex; flex-direction: column; gap: 14px; }
   .row h2 { margin: 0; }
