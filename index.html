@@ -97,13 +97,11 @@
   .small { margin: 6px 0 0; font-size: 14px; color: var(--muted); }
 
   .phones { position: relative; height: 560px; max-width: 520px; width: 100%; justify-self: center; }
-  /* A little shorter than a real phone: each screen's empty band at the top (where
-     the status bar would be) and some of its empty bottom fall outside the frame,
-     so the screen fills it. --y says where each one sits (see the images). */
-  .phone { position: absolute; width: 250px; aspect-ratio: 402 / 789; padding: 8px; border-radius: 44px; background: var(--frame);
+  /* As tall as the phone. Each screen is laid out to its top edge (no status bar),
+     so it fills the frame. */
+  .phone { position: absolute; width: 250px; aspect-ratio: 402 / 874; padding: 8px; border-radius: 44px; background: var(--frame);
            box-shadow: 0 40px 70px -30px rgba(17,18,20,.45); }
-  .phone img, .phone video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center var(--y, 50%);
-                             border-radius: 36px; background: #000; }
+  .phone img, .phone video { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 36px; background: #000; }
   .phone img.keep-left { object-position: left center; }
   .phones .back { left: 52%; top: 24px; transform: rotate(7deg); }
   .phones .front { left: 6%; top: 0; transform: rotate(-5deg); z-index: 1; }
@@ -191,8 +189,8 @@
       </div>
       <div class="phones">
         <div class="phone back">
-          <img class="when-light" src="home.jpg" style="--y: 79%" alt="Ascent's Home screen with Pocket, Vision and Upload, a goal of 100.3 cm and a personal record of 92.2 cm">
-          <img class="when-dark" src="home-dark.jpg" style="--y: 79%" alt="Ascent's Home screen in dark mode with Pocket, Vision and Upload, a goal of 100.3 cm and a personal record of 92.2 cm">
+          <img class="when-light" src="home-full.jpg" alt="Ascent's Home screen with Pocket, Vision and Upload, a goal of 100.3 cm and a personal record of 92.2 cm">
+          <img class="when-dark" src="home-dark-full.jpg" alt="Ascent's Home screen in dark mode with Pocket, Vision and Upload, a goal of 100.3 cm and a personal record of 92.2 cm">
         </div>
         <div class="phone front"><img class="keep-left" src="highlight.jpg" alt="An Ascent highlight at the top of a dunk, 82.0 cm, 4.01 m/s takeoff, 0.82 s hang time, with the path of the jump drawn in"></div>
       </div>
@@ -212,8 +210,8 @@
         <p class="mode-line" id="mode-line">Put it in your pocket and jump. Made for quick repetitive sets.</p>
       </div>
       <div class="phone">
-        <video id="mode-video" src="pocket-set.mp4" poster="pocket-set.jpg" style="--y: 65%" autoplay muted loop playsinline aria-label="Pocket during a set, five jumps landing one by one from 53 to 61 cm, the best marked"></video>
-        <img id="mode-screen" src="pocket-set.jpg" alt="" hidden>
+        <video id="mode-video" src="pocket-full.mp4" poster="pocket-full.jpg" autoplay muted loop playsinline aria-label="Pocket during a set, five jumps landing one by one from 53 to 61 cm, the best marked"></video>
+        <img id="mode-screen" src="pocket-full.jpg" alt="" hidden>
       </div>
     </div>
 
@@ -222,7 +220,7 @@
         <h2>Precision.</h2>
         <p>Ascent finds takeoff and landing for you. Adjust manually afterwards to find the exact jump height.</p>
       </div>
-      <div class="phone"><img src="exact-filled.jpg" style="--y: 51%" alt="Adjusting frames on a dunk, takeoff at frame 21 of 118 and landing at frame 70, one frame at a time" loading="lazy"></div>
+      <div class="phone"><img src="adjust-full.jpg" alt="Adjusting frames on a dunk, takeoff at frame 21 of 118 and landing at frame 70, one frame at a time" loading="lazy"></div>
     </div>
 
     <div class="row">
@@ -298,9 +296,9 @@
 
   // Measure it: each way to measure swaps the phone's screen and the line above.
   const ways = [
-    ['pocket-set.mp4', 'Put it in your pocket and jump. Made for quick repetitive sets.', 'Pocket during a set, five jumps landing one by one from 53 to 61 cm, the best marked', '65%'],
-    ['vision.jpg', 'Track your jumps live with Vision. Hit record to keep each jump as a clip with its exact height.', 'Vision tracking a jump at its peak, jump 3 at 79 cm', '53%'],
-    ['upload-screen.jpg', 'Upload a video to analyse. Ascent finds every jump in it, even from a whole session.', "Upload's first screen, to choose a video or hold to film one", '71%'],
+    ['pocket-full.mp4', 'Put it in your pocket and jump. Made for quick repetitive sets.', 'Pocket during a set, five jumps landing one by one from 53 to 61 cm, the best marked'],
+    ['vision.jpg', 'Track your jumps live with Vision. Hit record to keep each jump as a clip with its exact height.', 'Vision tracking a jump at its peak, jump 3 at 79 cm'],
+    ['upload-full.jpg', 'Upload a video to analyse. Ascent finds every jump in it, even from a whole session.', "Upload's first screen, to choose a video or hold to film one"],
   ];
   // A way with a video plays it; the others show their screen.
   const screen = document.getElementById('mode-screen');
@@ -309,19 +307,17 @@
   ways.forEach(([src]) => { if (!src.endsWith('.mp4')) new Image().src = src; });
   document.querySelectorAll('.switch button').forEach((button) => {
     button.addEventListener('click', () => {
-      const [src, text, alt, y] = ways[Number(button.dataset.mode)];
+      const [src, text, alt] = ways[Number(button.dataset.mode)];
       document.querySelectorAll('.switch button').forEach((b) => b.setAttribute('aria-selected', String(b === button)));
       const isVideo = src.endsWith('.mp4');
       video.hidden = !isVideo; screen.hidden = isVideo;
       if (isVideo) {
         if (!video.src.endsWith(src)) { video.poster = src.replace('.mp4', '.jpg'); video.src = src; }
         video.setAttribute('aria-label', alt);
-        video.style.setProperty('--y', y);
         video.currentTime = 0; video.play().catch(() => {});
       } else {
         video.pause();
         screen.src = src; screen.alt = alt;
-        screen.style.setProperty('--y', y);
       }
       line.textContent = text;
     });
