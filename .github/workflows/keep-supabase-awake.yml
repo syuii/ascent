@@ -13,9 +13,12 @@ jobs:
     steps:
       - name: Ping the waitlist database
         run: |
-          # A real query that row security answers with nothing: enough to count
-          # as activity, and the publishable key (already in the page) can't read anything.
-          curl --fail --silent --show-error --output /dev/null \
+          # A real query that reads nothing: asks whether one handle is free (it
+          # answers yes or no), enough to count as activity. Signed-out visitors
+          # can't read any table, so a table query would be refused.
+          curl --fail --silent --show-error --output /dev/null -X POST \
             -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqa2V2ZnJ3eG5iZHdoeXZyZGl5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYxMTYxMDMsImV4cCI6MjEwMTY5MjEwM30.zBrxC6fotUj_4pAVBZ_6PrhSdOP0eX16Y5o7-0MB0eo" \
             -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqa2V2ZnJ3eG5iZHdoeXZyZGl5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYxMTYxMDMsImV4cCI6MjEwMTY5MjEwM30.zBrxC6fotUj_4pAVBZ_6PrhSdOP0eX16Y5o7-0MB0eo" \
-            "https://ajkevfrwxnbdwhyvrdiy.supabase.co/rest/v1/athlete?select=id&limit=1"
+            -H "Content-Type: application/json" \
+            -d '{"requested":"keepawake"}' \
+            "https://ajkevfrwxnbdwhyvrdiy.supabase.co/rest/v1/rpc/handle_available"
