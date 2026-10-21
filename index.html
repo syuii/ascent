@@ -230,7 +230,7 @@
         <h2>Share it.</h2>
         <p>Share or save your best jump as a highlight.</p>
       </div>
-      <div class="phone"><img class="keep-left" src="share-92-top.jpg" alt="An Ascent highlight at the top of a jump to the top of the wall, 92.2 cm, 4.25 m/s takeoff, 0.87 s hang time, with the path of the jump drawn in" loading="lazy"></div>
+      <div class="phone"><video src="share-92-loop.mp4" poster="share-92-loop.jpg" muted loop playsinline preload="metadata" aria-label="An Ascent highlight of a 92.2 cm jump to the top of the wall, the line drawing the run-up and the jump, the takeoff speed and hang time counting up to 4.25 m/s and 0.87 s"></video></div>
     </div>
   </section>
 
@@ -324,6 +324,15 @@
       line.textContent = text;
     });
   });
+
+  // The videos in the rows play while they're on screen and rest while
+  // they're not (the page is long; nothing loops out of sight).
+  const inView = new IntersectionObserver((entries) => {
+    entries.forEach(({ target, isIntersecting }) => {
+      if (isIntersecting) { if (!target.hidden) target.play().catch(() => {}); } else { target.pause(); }
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('.row video').forEach((v) => inView.observe(v));
 
   // Light or dark: flips whatever is showing now, and remembers it.
   document.getElementById('theme').addEventListener('click', () => {
